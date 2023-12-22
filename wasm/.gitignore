@@ -1,0 +1,33 @@
+# Cargo.lock file
+Cargo.lock
+
+# target directory
+target/
+
+# Cargo's metadata file
+*.cargo
+
+# Cargo's temporary files
+.cargo/registry/index/
+.cargo/git/db/
+.cargo/git/fetch/
+
+# IDE files
+.idea/
+.vscode/
+
+# Dependency directories
+/.cargo/
+/dependency-name/
+
+# Rustfmt configuration file
+rustfmt.toml
+
+# clippy configuration file
+clippy.toml
+
+# Rust upgrade script
+.rustup/upgrade.sh
+
+# Rustup directories
+.rustup/

@@ -1,0 +1,23 @@
+{
+  "name": "poly-task",
+  "description": "Poly task",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krisbitney/polytask.git"
+  },
+  "main": "build/index.js",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "copy-wasm": "cp wasm/target/wasm32-unknown-unknown/release/poly_wasm.wasm poly.wasm",
+    "build:wasm": "cd wasm && cargo build --target=wasm32-unknown-unknown --release && cd .. && yarn copy-wasm",
+    "build:sdk": "cd sdk && yarn build && cd ..",
+    "build:api": "cd api && yarn build && cd ..",
+    "build": "yarn build:wasm && yarn build:sdk && yarn build:api",
+    "start": "docker-compose up",
+    "test": "cd sdk && yarn test && cd .."
+  }
+}
