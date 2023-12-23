@@ -62,6 +62,7 @@ export class PolySdk {
                 // TODO: Handle error
                 throw error;
             });
+        console.log(wasmModule)
         return new WasmHandler(new Uint8Array(wasmModule));
     }
 
