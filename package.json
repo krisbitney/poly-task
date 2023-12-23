@@ -17,6 +17,6 @@
     "build:api": "cd api && yarn install --force && yarn build && cd ..",
     "build": "yarn build:wasm && yarn build:sdk && yarn build:api",
     "start": "cd api && yarn start",
-    "test": "cd sdk && yarn && yarn build && yarn test && cd .."
+    "test": "cd sdk && yarn test && cd .."
   }
 }
