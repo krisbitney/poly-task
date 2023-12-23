@@ -1,6 +1,7 @@
 import { WasmHandler } from "./WasmHandler";
 import { ADD_ENDPOINT, BASE_URL, WASM_MODULE_URL } from "./constants";
-import {AddResponse, i32} from "./types";
+import { AddResponse, i32 } from "./types";
+import axios from "axios";
 
 export interface PolySdkOptions {
     runLocallyByDefault?: boolean;
@@ -20,7 +21,7 @@ export class PolySdk {
         if (!this.is32BitInt(n1) || !this.is32BitInt(n2)) {
             throw new Error("Invalid input");
         }
-        const shouldRunLocally = this?.options?.runLocallyByDefault ?? false;
+        const shouldRunLocally = this?.options?.runLocallyByDefault ?? runLocally ?? false;
         console.log(`Executing doWork locally: ${shouldRunLocally}`);
         if (shouldRunLocally) {
             if (!this.localModule) {
@@ -30,16 +31,23 @@ export class PolySdk {
             console.log(`Local result: ${result}`);
             return result;
         }
-        return await fetch(`${BASE_URL}/${ADD_ENDPOINT}?n1=${n1}&n2=${n2}`)
-            .then((response) => response.json() as Promise<AddResponse>)
-            .then((addResponse) => {
-                if (addResponse.error) {
-                    throw new Error(addResponse.error);
-                } else if (addResponse.result === undefined) {
+
+        const url = `${BASE_URL}/${ADD_ENDPOINT}`;
+        console.log(`Executing doWork remotely: ${url}`);
+        return await axios.get<AddResponse>(url, {
+            params: {
+                n1,
+                n2
+            }
+        })
+            .then((response) => {
+                if (response.data.error) {
+                    throw new Error(response.data.error);
+                } else if (response.data.result === undefined) {
                     throw new Error("Invalid response");
                 }
-                console.log(`Server result: ${addResponse.result}`);
-                return addResponse.result;
+                console.log(`Server result: ${response.data.result}`);
+                return response.data.result;
             })
             .catch((error) => {
                 // TODO: Handle error

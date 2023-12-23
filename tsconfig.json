@@ -26,6 +26,6 @@
   },
   "include": [
     "./sdk/src/**/*.ts",
-    "./server/src/**/*.ts"
+    "./api/src/**/*.ts"
   ]
 }

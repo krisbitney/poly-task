@@ -7,6 +7,7 @@ const port = 3000;
 const sdk = new PolySdk({ runLocallyByDefault: true });
 
 app.get("/add", async (req: Request, res: Response) => {
+    console.log("Received request");
     let result: i32;
     try {
         const n1: i32 = parseInt(req.params["n1"]);

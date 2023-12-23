@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  wasm:
+    build: .
+    volumes:
+      - ./build:/wasm/build
+    command: ["cp", "-f", "./poly.wasm", "./build/poly.wasm"]

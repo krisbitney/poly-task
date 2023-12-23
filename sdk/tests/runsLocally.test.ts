@@ -1,4 +1,4 @@
-import {PolySdk} from "../build";
+import {PolySdk} from "../src";
 
 jest.setTimeout(360000);
 
@@ -11,7 +11,7 @@ describe("PolySDK", () => {
         expect(result).toBe(3);
     });
 
-    it("should run in server", async () => {
+    it("should run in api", async () => {
         const result = await sdk.doWork(1, 2, false);
         expect(result).toBe(3);
     });
