@@ -23,6 +23,7 @@ export class PolySdk {
         }
         const shouldRunLocally = this?.options?.runLocallyByDefault ?? runLocally ?? false;
         console.log(`Executing doWork locally: ${shouldRunLocally}`);
+
         if (shouldRunLocally) {
             if (!this.localModule) {
                 this.localModule = await this.createWasmHandler();

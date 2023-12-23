@@ -10,11 +10,13 @@ app.get("/add", async (req: Request, res: Response) => {
     console.log("Received request");
     let result: i32;
     try {
-        const n1: i32 = parseInt(req.params["n1"]);
-        const n2: i32 = parseInt(req.params["n2"]);
+        const query = req.query as { n1: string; n2: string };
+        const n1: i32 = parseInt(query.n1);
+        const n2: i32 = parseInt(query.n2);
+        console.log(`Remotely adding ${n1} + ${n2}`);
         result = await sdk.doWork(n1, n2);
     } catch (e) {
-        res.status(400).send({ error: e.message });
+        res.send({ error: e.message });
         return;
     }
     res.send({ result });
