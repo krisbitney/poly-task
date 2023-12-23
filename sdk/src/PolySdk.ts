@@ -56,13 +56,14 @@ export class PolySdk {
     }
 
     private async createWasmHandler(): Promise<WasmHandler> {
-        const wasmModule = await fetch(WASM_MODULE_URL)
-            .then((response) => response.arrayBuffer())
+        const wasmModule = await axios.get<ArrayBuffer>(WASM_MODULE_URL, {
+            responseType: "arraybuffer"
+        })
+            .then((response) => response.data)
             .catch((error) => {
                 // TODO: Handle error
                 throw error;
             });
-        console.log(wasmModule)
         return new WasmHandler(new Uint8Array(wasmModule));
     }
 

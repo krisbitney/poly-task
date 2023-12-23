@@ -9,9 +9,7 @@ export class WasmHandler {
 
     wasmExports: readonly string[] = ["wasmExport"];
 
-    private memory = AsyncWasmInstance.createMemory({
-        module: this.wasmModule
-    });
+    private memory = new WebAssembly.Memory({ initial: 16 });
     private instance: AsyncWasmInstance | undefined;
     private exports: WasmExports | undefined;
 
